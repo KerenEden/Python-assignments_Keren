@@ -1,2 +1,2 @@
-##My Python course assignments and projects
+My Python course assignments and projects
 
