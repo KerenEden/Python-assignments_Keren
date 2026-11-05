@@ -1,0 +1,3 @@
+sample_id,dilution,rep1,rep2,rep3,cell_count
+siNT,-4,42,39,38,200000
+siTarget_protein,-4,60,38,43,170000
