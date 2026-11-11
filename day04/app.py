@@ -1,5 +1,5 @@
 import io
-from flask import Flask, render_template_string, request
+from flask import Flask, render_template_string, request, Response
 from plaque_assay import analyze_plaque_assay
 
 app = Flask(__name__)
@@ -35,6 +35,12 @@ HTML_TEMPLATE = """
         <input type="text" id="control_name" name="control_name" value="{{ control_name or 'siNT' }}" required>
 
         <label for="csv_file">Select CSV File:</label>
+        <p style="margin-bottom: 15px;">
+        Need a reference file? 
+        <a href="/download-template" style="color: #007bff; font-weight: bold; text-decoration: none;">
+        📥 Download CSV Template
+    </a>
+</p>
         <input type="file" id="csv_file" name="csv_file" accept=".csv" required>
 
         <button type="submit">Analyze Assay Data</button>
@@ -78,7 +84,18 @@ HTML_TEMPLATE = """
 </body>
 </html>
 """
-
+@app.route("/download-template")
+def download_template():
+    csv_template = (
+        "sample_id,dilution,rep1,rep2,rep3,cell_count\n"
+        "siNT,-4,52,48,50,200000\n"
+        "siTarget_protein,-4,45,48,49,170000\n"
+    )
+    return Response(
+        csv_template,
+        mimetype="text/csv",
+        headers={"Content-Disposition": "attachment; filename=plaque_assay_template.csv"}
+    )
 
 @app.route("/", methods=["GET", "POST"])
 def home():
