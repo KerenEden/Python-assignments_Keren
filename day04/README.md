@@ -42,3 +42,9 @@ The results will be displayed as text directly in the terminal window.
 - **Norm Ratio:** Control cell count divided by sample cell count.
 - **Corrected Mean:** Mean plaques multiplied by the normalization ratio.
 - **Yield (%):** Corrected mean of the sample compared to the control sample (set to 100%).
+
+## Running Tests
+Unit tests for the plaque assay business logic (`plaque_assay.py`) are located in `test_plaque_assay.py`. To run the tests from the terminal:
+
+```bash
+uv run --with pytest pytest
